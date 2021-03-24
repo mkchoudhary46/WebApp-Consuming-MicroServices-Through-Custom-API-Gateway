@@ -1,0 +1,7 @@
+﻿CREATE TABLE Department
+(
+Id INT IDENTITY(1,1) CONSTRAINT Pk_Department_Id PRIMARY KEY,
+Name VARCHAR(100)
+)
+
+

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Detail Page";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to show list of all employees.</p>
+
+
+
+<div class="text-center" id="unauthorisedaccess">
+    <h1 class="display-4">Big Sorry!!!</h1>
+    <p>You cannot access this page.</p>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getDetails();
+        });
+
+        function getDetails() {
+            $.ajax({
+                url: "https://localhost:44385/employee",
+                type: "GET",
+               // dataType: "json",
+                contentType: "application/json",
+                headers: { "Authorization": localStorage.getItem('token') },
+                success: function (result, status, xhr) {
+                    alert("logged -in successfully");
+                    $("unauthorisedaccess").hide();
+
+                },
+                error: function (xhr, status, error) {
+                    alert("Authentication failure..");
+                }
+            });
+        }
+
+        function tokenSuccess(err, response) {
+            if (err) {
+                throw err;
+            }
+            $window.sessionStorage.accessToken = response.body.access_token;
+        }
+
+    </script>
+}

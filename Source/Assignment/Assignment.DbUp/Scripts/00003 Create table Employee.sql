@@ -1,0 +1,13 @@
+﻿CREATE TABLE Employee
+(
+Id INT IDENTITY(1,1) CONSTRAINT Pk_Employee_Id PRIMARY KEY,
+Name VARCHAR(100),
+Contact VARCHAR(MAX),
+Email VARCHAR(MAX),
+GenderId INT NOT NULL CONSTRAINT Fk_Employee_GenderId FOREIGN KEY REFERENCES Gender(Id),
+DepartmentId INT NOT NULL CONSTRAINT Fk_Employee_DepartmentId FOREIGN KEY REFERENCES Department(Id),
+Salary DECIMAL(10,2),
+PasswordSalt VARCHAR(MAX),
+PasswordHash VARCHAR(MAX),
+CreatedDate DATETIME NOT NULL CONSTRAINT Df_Employee_CreatedDate DEFAULT(GETDATE())
+)
